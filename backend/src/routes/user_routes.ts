@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { getAllUsers, userSignup } from "../controllers/user_controller.js";
-import { signupValidator, validate } from "../utils/validators.js";
+import { getAllUsers, userLogin, userSignup } from "../controllers/user_controller.js";
+import { signinValidator, signupValidator, validate } from "../utils/validators.js";
 
 const userRoutes = Router();
 
@@ -8,5 +8,6 @@ const userRoutes = Router();
 
 userRoutes.get("/", getAllUsers)
 userRoutes.post("/signup", validate(signupValidator), userSignup)
+userRoutes.post("/login", validate(signinValidator), userLogin)
 
 export default userRoutes;
