@@ -12,9 +12,8 @@ app.use(morgan("dev"));
 
 // middlewares
 app.use(express.json());
-app.use(cookieParser(process.env.COOKIE_SECRET))
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
-app.use("/api/v1", appRouter)
-
+app.use("/api/v1", appRouter);
 
 export default app;
