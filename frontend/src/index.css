@@ -11,3 +11,18 @@ html, body{
 .image-inverted{
   filter: invert(100%);
 }
+
+.navlink{
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 8px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  letter-spacing: 3px;
+}
+.navlink:hover{
+  opacity: 0.8;
+  transition-duration: 100ms;
+}
