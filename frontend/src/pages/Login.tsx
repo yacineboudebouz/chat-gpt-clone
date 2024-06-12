@@ -1,5 +1,6 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
+import CustomTextField from "../components/shared/CustomTextField";
 
 const Login = () => {
   return (
@@ -23,7 +24,26 @@ const Login = () => {
             borderRadius: "10px",
             border: "none",
           }}
-        ></form>
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <Typography
+              variant="h4"
+              textAlign="center"
+              padding={2}
+              fontWeight={600}
+            >
+              Login
+            </Typography>
+            <CustomTextField type="email" name="email" label="Email" />
+            <CustomTextField type="password" name="password" label="Password" />
+          </Box>
+        </form>
       </Box>
     </Box>
   );

@@ -26,3 +26,7 @@ html, body{
   opacity: 0.8;
   transition-duration: 100ms;
 }
+
+.MuiOutlinedInput-input-root.Mui-focused, .MuiOutlinedInput-notchedOutline{
+  border-color: white !important;
+}
