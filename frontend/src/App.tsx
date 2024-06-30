@@ -3,6 +3,10 @@ import Header from "./components/Header";
 import { Routes, Route } from "react-router-dom";
 import { Home, Login, Signup, Chat, NotFound } from "./pages";
 import { useAuth } from "./context/AuthContext";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:5000/api/v1";
+axios.defaults.withCredentials = true;
 
 function App() {
   console.log(useAuth()?.isLoggedIn);

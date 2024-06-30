@@ -51,7 +51,7 @@ export const userLogin = async (
       expires,
       signed: true,
     });
-    res.status(200).json({ message: "OK", id: user._id.toString() });
+    res.status(200).json({ message: "OK", name: user.name, email: user.email });
     return;
   } catch (e) {
     res.status(500).json({ message: "Error", error: e.message });

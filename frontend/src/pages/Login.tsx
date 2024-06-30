@@ -1,13 +1,24 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import CustomTextField from "../components/shared/CustomTextField";
+import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 const Login = () => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const auth = useAuth();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const email = formData.get("email");
-    const password = formData.get("password");
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    try {
+      toast.loading("Signin In", { id: "login" });
+      await auth?.login(email, password);
+      toast.success("Signed in Successfully", { id: "login" });
+    } catch (error) {
+      console.log(error);
+      toast.error("Signing in Failed", { id: "login" });
+    }
   };
   return (
     <Box width={"100%"} height={"100%"} display={"flex"} flex={1}>
