@@ -17,7 +17,6 @@ export const verifyToken = (
 ) => {
   try {
     const token = req.signedCookies[`${COOKIE_NAME}`];
-    console.log(token);
     if (!token || token.trim() === "") {
       return res.status(401).json({ message: "Unauthorized" });
     }
@@ -27,7 +26,6 @@ export const verifyToken = (
           reject(err.message);
           return res.status(401).json({ message: "Unauthorized" });
         } else {
-          console.log("Token verification success");
           resolve();
           res.locals.jwtData = success;
           return next();
