@@ -1,59 +1,27 @@
-import { Avatar, Box, Button, Typography } from "@mui/material";
-import React from "react";
+import { Avatar, Box, Button, IconButton, Typography } from "@mui/material";
+import React, { useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { red } from "@mui/material/colors";
 import ChatItem from "../components/chat/ChatItem";
+import { IoMdSend } from "react-icons/io";
 
-const chatMessages = [
-  {
-    role: "user",
-    content: "Hello, how are you today?",
-  },
-  {
-    role: "assistant",
-    content:
-      "I'm an AI assistant, so I don't have feelings, but I'm here and ready to help you with anything you need!",
-  },
-  {
-    role: "user",
-    content: "Can you tell me the weather forecast for today?",
-  },
-  {
-    role: "assistant",
-    content:
-      "Sure! Please provide me with your location so I can look up the weather forecast for you.",
-  },
-  {
-    role: "user",
-    content: "I live in New York City.",
-  },
-  {
-    role: "assistant",
-    content:
-      "In New York City today, the weather forecast is sunny with a high of 75°F (24°C) and a low of 55°F (13°C).",
-  },
-  {
-    role: "user",
-    content: "Thank you! Can you also recommend a good restaurant in the city?",
-  },
-  {
-    role: "assistant",
-    content:
-      "Sure! One highly recommended restaurant in New York City is Le Bernardin, which is known for its excellent seafood and fine dining experience.",
-  },
-  {
-    role: "user",
-    content: "That sounds great. What are the operating hours?",
-  },
-  {
-    role: "assistant",
-    content:
-      "Le Bernardin is typically open for lunch from 12:00 PM to 2:30 PM and for dinner from 5:15 PM to 10:30 PM, Monday through Saturday. They are closed on Sundays.",
-  },
-];
+type Message = {
+  role: "user" | "assistant";
+  content: string;
+};
 
 const Chat = () => {
   const auth = useAuth();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [chatMessages, setChatMessages] = useState<Message[]>([]);
+  const handleSubmit = async () => {
+    const content = inputRef.current?.value as string;
+    if (inputRef && inputRef.current) {
+      inputRef.current.value = "";
+    }
+    const newMessage: Message = { role: "user", content };
+    setChatMessages((prev) => [...prev, newMessage]);
+  };
   return (
     <Box
       sx={{
@@ -63,6 +31,7 @@ const Chat = () => {
         height: "100%",
         mt: 3,
         gap: 3,
+        pb: 10,
       }}
     >
       <Box
@@ -146,10 +115,41 @@ const Chat = () => {
             scrollBehavior: "smooth",
           }}
         >
-          {chatMessages.map((chat) => (
-            <ChatItem role={chat.role} content={chat.content} />
+          {chatMessages.map((chat, index) => (
+            <ChatItem role={chat.role} content={chat.content} key={index} />
           ))}
         </Box>
+        <div
+          style={{
+            width: "100%",
+            padding: "20px",
+            borderRadius: 8,
+            backgroundColor: "rgb(17,27,39)",
+            display: "flex",
+            margin: "auto",
+          }}
+        >
+          {" "}
+          <input
+            type="text"
+            ref={inputRef}
+            style={{
+              width: "100%",
+              backgroundColor: "transparent",
+              padding: "10px",
+              border: "none",
+              outline: "none",
+              color: "white",
+              fontSize: "20px",
+            }}
+          />
+          <IconButton
+            onClick={handleSubmit}
+            sx={{ ml: "auto", color: "white" }}
+          >
+            <IoMdSend />
+          </IconButton>
+        </div>
       </Box>
     </Box>
   );
