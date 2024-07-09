@@ -1,7 +1,8 @@
 import axios from "axios";
+import { Endpoints } from "./Endpoints";
 
 export const loginUser = async (email: string, password: string) => {
-  const res = await axios.post("/user/login", { email, password });
+  const res = await axios.post(Endpoints.LOGIN, { email, password });
   if (res.status !== 200) {
     throw new Error("Unable to login");
   }
@@ -14,7 +15,7 @@ export const signupUser = async (
   email: string,
   password: string
 ) => {
-  const res = await axios.post("/user/signup", { name, email, password });
+  const res = await axios.post(Endpoints.SIGNUP, { name, email, password });
   if (res.status !== 200) {
     throw new Error("Unable to signup");
   }
@@ -23,9 +24,18 @@ export const signupUser = async (
 };
 
 export const checkAuthStatus = async () => {
-  const res = await axios.get("/user/auth-status");
+  const res = await axios.get(Endpoints.AUTHSTATUS);
   if (res.status !== 200) {
     throw new Error("Unable to authenticate");
+  }
+  const data = await res.data;
+  return data;
+};
+
+export const sendCHatRequest = async (message: string) => {
+  const res = await axios.post(Endpoints.NEWCHAT, { message });
+  if (res.status !== 200) {
+    throw new Error("Unable to send chat");
   }
   const data = await res.data;
   return data;

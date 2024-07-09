@@ -96,7 +96,7 @@ export const userSignup = async (
       expires,
       signed: true,
     });
-    res.status(200).json({ message: "OK", id: user._id.toString() });
+
     res.status(201).json({ message: "User created", id: user._id.toString() });
     return;
   } catch (e) {
