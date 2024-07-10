@@ -31,7 +31,7 @@ export const userLogin = async (
     }
     const isValid = await compare(password, user.password);
     if (!isValid) {
-      res.status(403).json({ message: "Invalid password" });
+      res.status(401).json({ message: "Invalid password" });
       return;
     }
     res.clearCookie(COOKIE_NAME, {

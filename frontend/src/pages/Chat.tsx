@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { red } from "@mui/material/colors";
 import ChatItem from "../components/chat/ChatItem";
 import { IoMdSend } from "react-icons/io";
-import { sendCHatRequest } from "../helpers/ApiCommunicator";
+import { sendChatRequest } from "../helpers/ApiCommunicator";
 import toast from "react-hot-toast";
 
 type Message = {
@@ -24,7 +24,7 @@ const Chat = () => {
       }
       const newMessage: Message = { role: "user", content };
       setChatMessages((prev) => [...prev, newMessage]);
-      const chatData = await sendCHatRequest(content);
+      const chatData = await sendChatRequest(content);
       setChatMessages([...chatData.chats]);
     } catch (e) {
       toast.error("Message sending failed");
